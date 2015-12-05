@@ -10,7 +10,6 @@
 mkdir -p /var/run/postgresql
 chown -R abc:abc /var/run/postgresql /app
 
-#!/bin/bash
 set -e
 
 set_listen_addresses() {
