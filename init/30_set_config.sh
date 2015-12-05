@@ -10,4 +10,6 @@ SANEDBRAINZCODE1="${SANEDBRAINZCODE0#"${SANEDBRAINZCODE0%%[![:space:]]*}"}"
 SANEDBRAINZCODE="${SANEDBRAINZCODE1%"${SANEDBRAINZCODE1##*[![:space:]]}"}"
 sed -i "s|\(sub REPLICATION_ACCESS_TOKEN\ {\ \\\"\)[^<>]*\(\\\"\ }\)|\1${SANEDBRAINZCODE}\2|" /config/DBDefs.pm
 
-chown abc:abc /config/DBDefs.pm
+mkdir -p /config/updater-logs
+[[ ! -f /config/updater-logs/slave.log ]] && touch /config/updater-logs/slave.log
+chown -R abc:abc /config

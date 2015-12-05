@@ -1,0 +1,1 @@
+0,59 * * * *  abc /bin/bash  /defaults/update-script.sh
