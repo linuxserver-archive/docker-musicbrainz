@@ -31,7 +31,7 @@ set_listen_addresses ''
 pid="$!"
 sleep 5s
 /sbin/setuser abc createdb  >/dev/null 2>&1
-/sbin/setuser abc psql --command "ALTER USER abc WITH SUPERUSER 'abc';"  >/dev/null 2>&1
+/sbin/setuser abc psql --command "ALTER USER abc WITH SUPERUSER PASSWORD 'abc';"  >/dev/null 2>&1
 sleep 5s
 
 #dumpver=$(curl -s $URL_ROOT/LATEST)
