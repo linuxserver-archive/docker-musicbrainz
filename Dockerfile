@@ -45,9 +45,30 @@ apt-get install $APTLIST -qy && \
 git clone --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
 
 # install cpan and node packages
-cd /app/musicbrainz && \
 mkdir -p $PERL5LIB && \
+cd /app/musicbrainz && \
+
+# git checkout version
+git checkout v-2015-05-18-schema-change && \
+
+# standard cpamn modules
 cpanm --installdeps --notest . && \
+
+# extra, checkout version specific cpanm modules.
+cpanm --notest SARTAK/MooseX-Role-Parameterized-0.27.tar.gz \
+Plack::Middleware::Debug::Base \
+Catalyst::Plugin::Cache::HTTP \
+Catalyst::Plugin::StackTrace \
+Cache::Memcached::Fast \
+JSON::Any Cache::Memory \
+Digest::MD5::File \
+Term::Size::Any \
+LWP::Protocol::https \
+Starlet \
+Plack::Handler::Starlet \
+Starlet::Server \
+Server::Starter \
+TURNSTEP/DBD-Pg-3.4.2.tar.gz && \
 
 cd /app/musicbrainz && \
 npm install && \
