@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /app/musicbrainz
+/sbin/setuser abc plackup -Ilib -r > /dev/null 2>&1
