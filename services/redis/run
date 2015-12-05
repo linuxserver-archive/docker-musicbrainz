@@ -1,0 +1,5 @@
+#!/bin/bash
+
+umask 0002
+
+exec /sbin/setuser abc redis-server
