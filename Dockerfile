@@ -70,7 +70,7 @@ ADD defaults/ /defaults/
 ADD init/ /etc/my_init.d/
 ADD services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh /defaults/update-script.sh && \
-chmod -v 600 /etc/cron.d/*
+chmod -v 644 /etc/cron.d/*
  
 # volumes and ports
 VOLUME /config /data

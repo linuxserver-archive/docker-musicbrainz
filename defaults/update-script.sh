@@ -1,5 +1,5 @@
 #!/bin/bash
-UPDATER_LOG_DIR=/config/updater-logs
+UPDATER_LOG_DIR=/config/log/musicbrainz
 mkdir -p $UPDATER_LOG_DIR
 touch $UPDATER_LOG_DIR/slave.log
 chown -R abc:abc $UPDATER_LOG_DIR
