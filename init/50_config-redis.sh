@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p /var/lib/redis /var/log/redis
 
 # If redi.conf file is missing copy one from the default
 if [ ! -f /config/redis.conf ]; then
@@ -9,4 +10,4 @@ if [ ! -f /config/redis.conf ]; then
   sed 's/^logfile \/var\/log\/redis\/redis-server.log/logfile \"\"/' -i /config/redis.conf
 fi
 
-
+chown -R abc:abc /var/lib/redis /var/log/redis
