@@ -68,8 +68,14 @@ apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 ADD defaults/ /defaults/
 ADD init/ /etc/my_init.d/
 ADD services/ /etc/service/
-RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh /defaults/update-script.sh
+RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh /defaults/update-script.sh && \
  
+# configure redis server
+sed 's/^daemonize yes/daemonize no/' -i /etc/redis/redis.conf && \
+sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /etc/redis/redis.conf && \
+sed 's/^logfile \/var\/log\/redis\/redis-server.log/logfile \"\"/' -i /etc/redis/redis.conf && \
+sed -i 's#/var/lib/redis#/data/redis#g' /etc/redis/redis.conf
+
 # volumes and ports
 VOLUME /config /data
 EXPOSE 5000
