@@ -2,4 +2,5 @@
 
 umask 0002
 
-exec /sbin/setuser abc redis-server
+exec /sbin/setuser abc redis-server /config/redis.conf
+

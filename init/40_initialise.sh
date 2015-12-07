@@ -43,13 +43,13 @@ mkdir -p "$DUMP_DEST"
 chown abc:abc "$DUMP_DEST"
 
 #/sbin/setuser abc curl -o "$DUMP_DEST"/MD5SUMS -L -C - "$DUMP_URL"/MD5SUMS
-#/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-cdstubs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cdstubs.tar.bz2
-#/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-cover-art-archive.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cover-art-archive.tar.bz2
+/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-cdstubs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cdstubs.tar.bz2
+/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-cover-art-archive.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cover-art-archive.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-derived.tar.bz2 -L -C - "$DUMP_URL"/mbdump-derived.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-editor.tar.bz2 -L -C - "$DUMP_URL"/mbdump-editor.tar.bz2
 #/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-sitemaps.tar.bz2 -L -C - "$DUMP_URL"/mbdump-sitemaps.tar.bz2
-#/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-stats.tar.bz2 -L -C - "$DUMP_URL"/mbdump-stats.tar.bz2
-#/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-wikidocs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-wikidocs.tar.bz2
+/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-stats.tar.bz2 -L -C - "$DUMP_URL"/mbdump-stats.tar.bz2
+/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-wikidocs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-wikidocs.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump.tar.bz2 -L -C - "$DUMP_URL"/mbdump.tar.bz2
 cd /app/musicbrainz
 /sbin/setuser abc ./admin/InitDb.pl --createdb --import "$DUMP_DEST"/mbdump*.tar.bz2 --tmp-dir "$DUMP_DEST" --echo
