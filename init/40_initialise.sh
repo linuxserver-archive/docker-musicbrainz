@@ -66,3 +66,4 @@ mkdir -p "$PGCONF"
 chown abc:abc "$PGCONF"/postgresql.conf
 chmod 666 "$PGCONF"/postgresql.conf
 
+crontab /defaults/musicbrainz
