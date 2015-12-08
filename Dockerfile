@@ -11,7 +11,7 @@ PERL5LIB="/app/perl" PGCONF="/config" \
 APTLIST="build-essential cpanminus git-core libbz2-dev \
 libdb-dev libexpat1-dev libicu-dev libjson-xs-perl \
 liblocal-lib-perl libpq-dev libxml2-dev memcached \
-nodejs npm postgresql-$PG_MAJOR postgresql-client-$PG_MAJOR \
+postgresql-$PG_MAJOR postgresql-client-$PG_MAJOR \
 postgresql-contrib-$PG_MAJOR postgresql-plperl-$PG_MAJOR \
 postgresql-server-dev-$PG_MAJOR python-software-properties \
 redis-server software-properties-common wget"
@@ -26,8 +26,9 @@ RUN locale-gen en_US.UTF-8
 # install postgres common
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 && \
 echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
-apt-get update -q && \
-apt-get install postgresql-common -qy && \
+curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
+apt-get install nodejs postgresql-common -qy && \
+npm install -g npm@latest && \
 sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf && \
 
 # cleanup
@@ -36,7 +37,7 @@ apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 # install packages
 RUN apt-get update -q && \
 apt-get install $APTLIST -qy && \
-ln -s /usr/bin/nodejs /usr/bin/node && \
+# ln -s /usr/bin/nodejs /usr/bin/node && \
 
 # cleanup
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
