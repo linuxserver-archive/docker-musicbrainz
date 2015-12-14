@@ -50,8 +50,8 @@ chown abc:abc "$DUMP_DEST"
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-stats.tar.bz2 -L -C - "$DUMP_URL"/mbdump-stats.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-wikidocs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-wikidocs.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump.tar.bz2 -L -C - "$DUMP_URL"/mbdump.tar.bz2
+/sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-sitemaps.tar.bz2 -L -C - "$DUMP_URL"/mbdump-sitemaps.tar.bz2
 # /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-edit.tar.bz2 -L -C - "$DUMP_URL"/mbdump-edit.tar.bz2
-# /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-sitemaps.tar.bz2 -L -C - "$DUMP_URL"/mbdump-sitemaps.tar.bz2
 
 cd /app/musicbrainz
 /sbin/setuser abc ./admin/InitDb.pl --createdb --import "$DUMP_DEST"/mbdump*.tar.bz2 --tmp-dir "$DUMP_DEST" --echo

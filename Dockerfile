@@ -72,6 +72,7 @@ ADD services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh /defaults/update-script.sh && \
  
 # configure redis server
+sed 's/^loglevel notice/loglevel warning/' -i /etc/redis/redis.conf && \
 sed 's/^daemonize yes/daemonize no/' -i /etc/redis/redis.conf && \
 sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /etc/redis/redis.conf && \
 sed 's/^logfile \/var\/log\/redis\/redis-server.log/logfile \"\"/' -i /etc/redis/redis.conf && \
