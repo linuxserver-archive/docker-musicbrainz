@@ -43,7 +43,7 @@ apt-get install $APTLIST -qy && \
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # clone musicbrainz repo
-RUN git clone --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
+RUN git clone -b production --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
 
 # install cpan and node packages
 mkdir -p $PERL5LIB && \
