@@ -42,7 +42,8 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 
 ## Versions
-
++ **15.12.2015:** Per latest musicbrainz blog, switched to production branch,
+latest stable code is now production branch in place of master.
 + **10.12.2015:** Initial release date 
 
 
