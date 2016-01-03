@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+
 
 # set some folders and permissions
 
@@ -7,8 +9,6 @@ chown abc:abc "$DATA_ROOT"
 
 mkdir -p /var/run/postgresql
 chown -R abc:abc /var/run/postgresql /app
-
-set -e
 
 set_listen_addresses() {
 	sedEscapedValue="$(echo "*" | sed 's/[\/&]/\\&/g')"
