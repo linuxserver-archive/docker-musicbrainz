@@ -34,7 +34,7 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 * You must register here to recieve a musicbrainz code to allow you to recieve database updates, it is free. [Get Code here](https://metabrainz.org/supporters/account-type). 
 * The initial import and setup of the database can take quite a long time, dependant on your download speed etc, be patient and don't restart the container before it's complete.
-
+* It appears there are issues with unraid and using /mnt/user/cache/appdata instead of /mnt/cache/appdata, use /mnt/cache/appdata.
 
 ## Logs
 * To monitor the logs of the container in realtime `docker logs -f musicbrainz`.
