@@ -23,6 +23,9 @@ ENV PGDATA $DATA_ROOT/dbase
 # Set the locale
 RUN locale-gen en_US.UTF-8
 
+# add prebuilds
+ADD defaults/ /defaults/
+
 # install postgres common
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 && \
 echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
@@ -66,7 +69,6 @@ apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 
 # add Custom files
-ADD defaults/ /defaults/
 ADD init/ /etc/my_init.d/
 ADD services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh /defaults/update-script.sh && \
