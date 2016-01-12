@@ -47,6 +47,7 @@ apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # clone musicbrainz repo
 RUN git clone -b production --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
+cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
 
 # install cpan and node packages
 mkdir -p $PERL5LIB && \
