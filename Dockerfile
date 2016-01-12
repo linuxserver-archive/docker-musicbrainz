@@ -55,7 +55,7 @@ cd /app/musicbrainz && \
 # standard cpamn modules
 cpanm --installdeps --notest . && \
 npm install && \
-./node_modules/.bin/gulp && \
+./script/compile_resources.sh && \
 
 # compile musicbrainz postgres deps
 cd /app/musicbrainz/postgresql-musicbrainz-unaccent && \
