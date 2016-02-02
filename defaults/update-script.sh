@@ -3,7 +3,7 @@ UPDATER_LOG_DIR=/config/log/musicbrainz
 mkdir -p $UPDATER_LOG_DIR
 touch $UPDATER_LOG_DIR/slave.log
 chown -R abc:abc $UPDATER_LOG_DIR
-cd /app/musicbrainz
+cd /app/musicbrainz || exit
 eval `./admin/ShowDBDefs`
 X=${SLAVE_LOG:=$UPDATER_LOG_DIR/slave.log}
 X=${LOGROTATE:=/usr/sbin/logrotate --state $UPDATER_LOG_DIR/.logrotate-state}
