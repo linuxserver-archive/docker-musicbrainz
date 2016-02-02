@@ -19,7 +19,7 @@ set_listen_addresses() {
 if [ ! -s "$PGDATA/PG_VERSION" ]; then
 chown -R abc:abc "$DATA_ROOT"
 
-dumpver=$(curl -s $URL_ROOT/LATEST)
+dumpver=$(curl -s "$URL_ROOT"/LATEST)
 DUMP_URL="$URL_ROOT"/"$dumpver"
 DUMP_DEST="$MBDATA"/"$dumpver"
 mkdir -p "$DUMP_DEST"
