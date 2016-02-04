@@ -19,12 +19,13 @@ set_listen_addresses() {
 if [ ! -s "$PGDATA/PG_VERSION" ]; then
 chown -R abc:abc "$DATA_ROOT"
 
-dumpver=$(curl -s "$URL_ROOT"/LATEST)
+dumpver=$(curl -s $URL_ROOT/LATEST)
 DUMP_URL="$URL_ROOT"/"$dumpver"
 DUMP_DEST="$MBDATA"/"$dumpver"
 mkdir -p "$DUMP_DEST"
 chown abc:abc "$DUMP_DEST"
-echo "fetching latest dump from musicbrainz, if this section fails try again later as musicbrainz dump may not be fully uploaded to their site"
+echo "fetching latest dump from musicbrainz, if this section fails try again later as musicbrainz dump may not be fully uploaded 
+to their site"
 
 # /sbin/setuser abc curl -o "$DUMP_DEST"/MD5SUMS -L -C - "$DUMP_URL"/MD5SUMS
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-cdstubs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cdstubs.tar.bz2
@@ -35,7 +36,7 @@ echo "fetching latest dump from musicbrainz, if this section fails try again lat
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-wikidocs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-wikidocs.tar.bz2
 /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump.tar.bz2 -L -C - "$DUMP_URL"/mbdump.tar.bz2
 # /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-sitemaps.tar.bz2 -L -C - "$DUMP_URL"/mbdump-sitemaps.tar.bz2
-# /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-edit.tar.bz2 -L -C - "$DUMP_URL"/mbdump-edit.tar.bz2
+# /sbin/setuser abc curl -o "$DUMP_DEST"/mbdump-edit.tar.bz2 -L -C - "$DUMP_URL"/mbdump-edit.tar.bz2
 
 echo "initialising empty databases"
 /sbin/setuser abc initdb >/dev/null 2>&1
@@ -70,3 +71,4 @@ chown abc:abc "$PGCONF"/postgresql.conf
 chmod 666 "$PGCONF"/postgresql.conf
 
 crontab /defaults/musicbrainz
+
