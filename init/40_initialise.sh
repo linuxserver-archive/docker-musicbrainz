@@ -55,7 +55,7 @@ sleep 5s
 echo "BEGINNING INITIAL DATABASE IMPORT ROUTINE, THIS COULD TAKE SEVERAL HOURS AND THE DOCKER MAY LOOK UNRESPONSIVE"
 echo "DO NOT STOP DOCKER UNTIL IT IS COMPLETED"
 
-cd /app/musicbrainz
+cd /app/musicbrainz || exit
 /sbin/setuser abc ./admin/InitDb.pl --createdb --import "$DUMP_DEST"/mbdump*.tar.bz2 --tmp-dir "$DUMP_DEST" --echo
 echo "INITIAL IMPORT IS COMPLETE, MOVING TO NEXT PHASE"
 
