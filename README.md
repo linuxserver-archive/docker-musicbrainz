@@ -42,7 +42,9 @@ Part of what makes our containers work so well is by allowing you to specify you
 
 
 ## Versions
-+ **03.01.2016:** Remove d/l of sitemaps file, missing from last 2 db dumps, move fetch of db/dump higher up initialise routine to allow easier resume of broken downloads.
++ **08.02.16:** Switch to PPA version for redis
++ **03.01.2016:** Remove d/l of sitemaps file, missing from last 2 db dumps, 
+move fetch of db/dump higher up initialise routine to allow easier resume of broken downloads.
 + **15.12.2015:** Per latest musicbrainz blog, switched to production branch,
 latest stable code is now production branch in place of master.
 + **10.12.2015:** Initial release date 
