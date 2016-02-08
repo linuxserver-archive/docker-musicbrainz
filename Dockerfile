@@ -38,7 +38,8 @@ sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/create
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 # install packages
-RUN apt-get update -q && \
+RUN add-apt-repository ppa:chris-lea/redis-server && \
+apt-get update -q && \
 apt-get install $APTLIST -qy && \
 # ln -s /usr/bin/nodejs /usr/bin/node && \
 
