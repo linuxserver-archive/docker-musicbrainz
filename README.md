@@ -13,10 +13,14 @@ MusicBrainz is an open music encyclopedia that collects music metadata and makes
 ## Usage
 
 ```
-docker create --name=musicbrainz -v <path to config >:/config \
--v <path to data >:/data -e PGID=<gid> -e PUID=<uid> \
--e BRAINZCODE=<code from musicbrainz> -e TZ=<timezone> \
--p 5000:5000 lsiodev/musicbrainz
+docker create --name=musicbrainz \
+-v <path to config >:/config \
+-v <path to data >:/data \
+-e PGID=<gid> -e PUID=<uid> \
+-e BRAINZCODE=<code from musicbrainz> \
+-e TZ=<timezone> \
+-p 5000:5000 \
+lsiodev/musicbrainz
 ```
 
 **Parameters**
