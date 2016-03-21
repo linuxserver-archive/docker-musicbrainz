@@ -58,6 +58,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 
 ## Versions
++ **21.03.2016:** Bump to latest server release
 + **16.03.2016:** Bump to latest server release
 + **26.02.2016:** Bump to latest server release
 + **08.02.16:** Switch to PPA version for redis
