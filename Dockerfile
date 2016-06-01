@@ -2,7 +2,7 @@ FROM linuxserver/baseimage
 
 MAINTAINER Sparklyballs <sparklyballs@linuxserver.io>
 
-ENV DATA_ROOT="/data" PG_MAJOR="9.4" 
+ENV DATA_ROOT="/data" PG_MAJOR="9.5" 
 
 ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en" LC_ALL="en_US.UTF-8" \
 URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport" \
