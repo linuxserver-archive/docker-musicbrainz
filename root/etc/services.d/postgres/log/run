@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv bash
+exec logutil-service -f /var/run/s6/postgres-logs-fifo /var/log/postgresql
+

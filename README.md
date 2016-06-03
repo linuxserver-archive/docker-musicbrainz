@@ -58,6 +58,10 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 
 ## Versions
++ **03.06.2016:** Complete rewrite due to schema change. 
+Rebased back to 14.04 direct
+Using S6 overaly.
+
 + **21.03.2016:** Bump to latest server release
 + **16.03.2016:** Bump to latest server release
 + **26.02.2016:** Bump to latest server release

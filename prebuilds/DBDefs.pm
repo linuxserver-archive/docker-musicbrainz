@@ -99,7 +99,7 @@ MusicBrainz::Server::DatabaseConnectionFactory->register_databases(
 # replication_control.current_schema_sequence.
 # This is required, there is no default in order to prevent it changing without
 # manual intervention.
-sub DB_SCHEMA_SEQUENCE { 22 }
+sub DB_SCHEMA_SEQUENCE { 23 }
 
 # What type of server is this?
 # * RT_MASTER - This is a master replication server.  Changes are allowed, and
@@ -115,10 +115,11 @@ sub DB_SCHEMA_SEQUENCE { 22 }
 # * RT_STANDALONE - This server neither generates nor uses replication
 #               packets.  Changes to the database are allowed.
 sub REPLICATION_TYPE { RT_SLAVE }
+
 # If you plan to use the RT_SLAVE setting (replicated data from MusicBrainz' Live Data Feed)
 # you must sign in at https://metabrainz.org and generate an access token to access
 # the replication packets. Enter the access token below:
-# NOTE: DO NOT EXPOSE THIS ACCESS TOKEN PUBLICLY! 
+# NOTE: DO NOT EXPOSE THIS ACCESS TOKEN PUBLICLY!
 #
 sub REPLICATION_ACCESS_TOKEN { "" }
 
@@ -150,6 +151,7 @@ sub REPLICATION_ACCESS_TOKEN { "" }
 # MUSICBRAINZ_USE_PROXY=1 when using a reverse proxy to make the server
 # aware of it when generating things like the canonical url in catalyst.
 sub WEB_SERVER { "localhost:5000" }
+
 # Relevant only if SSL redirects are enabled
 # sub WEB_SERVER_SSL            { "localhost" }
 # sub LUCENE_SERVER             { "search.musicbrainz.org" }
@@ -291,6 +293,10 @@ sub DB_STAGING_SERVER { 0 }
 #     return \%CACHE_MANAGER_OPTIONS
 # }
 
+# Sets the TTL for entities stored in memcached, in seconds. A value of 0
+# indicates that no expiration is set.
+# sub ENTITY_CACHE_TTL { 0 }
+
 ################################################################################
 # Rate-Limiting
 ################################################################################
@@ -321,7 +327,7 @@ sub DB_STAGING_SERVER { 0 }
 # sub DATASTORE_REDIS_ARGS {
 #     my $self = shift;
 #     return {
-#         prefix => $self->MEMCACHED_NAMESPACE(),
+#         prefix => 'MB:',
 #         database => 0,
 #         test_database => 1,
 #         redis_new_args => {
@@ -428,7 +434,7 @@ sub DB_STAGING_SERVER { 0 }
 # If you are developing on MusicBrainz, you should set this to a true value
 # This will turn off some optimizations (such as CSS/JS compression) to make
 # developing and debuging easier
-sub DEVELOPMENT_SERVER { 0 }
+# sub DEVELOPMENT_SERVER { 1 }
 
 # How long to wait before rechecking template files (undef uses the
 # Template::Toolkit default)
@@ -489,4 +495,3 @@ sub DEVELOPMENT_SERVER { 0 }
 
 1;
 # eof DBDefs.pm
-
