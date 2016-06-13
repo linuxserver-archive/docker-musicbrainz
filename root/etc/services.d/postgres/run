@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+
+s6-setuidgid abc postgres -D "${PGDATA}" -c config_file="${PGCONF}"/postgresql.conf \
+2> /var/run/s6/postgres-logs-fifo
+
+
+

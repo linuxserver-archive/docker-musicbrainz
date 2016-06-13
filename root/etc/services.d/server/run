@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+cd /app/musicbrainz
+s6-setuidgid abc plackup -Ilib -r > /dev/null 2>&1

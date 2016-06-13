@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/with-contenv bash
 
 [[ ! -f /config/DBDefs.pm ]] && cp /defaults/DBDefs.pm /config/DBDefs.pm
 [[ ! -L /app/musicbrainz/lib/DBDefs.pm && -f /app/musicbrainz/lib/DBDefs.pm ]] && rm /app/musicbrainz/lib/DBDefs.pm

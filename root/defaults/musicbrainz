@@ -1,0 +1,2 @@
+0 * * * * /defaults/update-script.sh
+

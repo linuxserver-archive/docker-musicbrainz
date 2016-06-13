@@ -1,3 +1,0 @@
-#!/bin/bash
-exec /sbin/setuser abc postgres -D $PGDATA -c config_file=$PGCONF/postgresql.conf
-

@@ -22,4 +22,3 @@ $SLAVE_LOG {
 }
 EOF
 #eof
-
