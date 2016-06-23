@@ -76,6 +76,7 @@ RUN \
  git clone -b production --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
+	cpanm MLEHMANN/Coro-6.49.tar.gz && \
 	cpanm --installdeps --notest . && \
 	npm install && \
 	./script/compile_resources.sh && \
