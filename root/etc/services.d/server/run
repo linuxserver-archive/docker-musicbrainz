@@ -1,4 +1,4 @@
 #!/usr/bin/with-contenv bash
 
 cd /app/musicbrainz
-s6-setuidgid abc plackup -Ilib -r > /dev/null 2>&1
+s6-setuidgid abc start_server --port=5000 -- plackup -I lib -s Starlet --max-workers $MAX_WORKERS > /dev/null 2>&1
