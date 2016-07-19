@@ -67,7 +67,7 @@ RUN \
 	wget && \
 
 # install nodejs and npm
- curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
+ curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
  apt-get install -y \
 	nodejs && \
  	npm install -g npm@latest && \
