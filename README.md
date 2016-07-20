@@ -34,7 +34,7 @@ lsiodev/musicbrainz
 * `-e BRAINZCODE` - to enter musicbrainz code. see below
 * `-e TZ` - timezone eg Europe/London
 * `-e MAX_WORKERS` Advanced optional configuration for parallel requests. 
-It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
+It is based on ubuntu trusty with S6 overlay, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
 
 ### User / Group Identifiers
 
