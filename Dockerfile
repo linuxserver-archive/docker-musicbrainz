@@ -5,19 +5,19 @@ MAINTAINER sparklyballs
 ARG PERL5LIB="/app/perl"
 ARG DEBIAN_FRONTEND="noninteractive"
 
+# set version for s6 overlay
+ARG OVERLAY_VERSION="v1.18.1.3"
+
 # global environment settings
-ENV HOME="/root"
-ENV TERM="xterm"
-ENV LANG="en_US.UTF-8"
-ENV LANGUAGE="en_US:en"
-ENV PGCONF="/config"
-ENV DATA_ROOT="/data"
-ENV PG_MAJOR="9.5"
-ENV PATH /usr/lib/postgresql/"${PG_MAJOR}"/bin:$PATH
-ENV MBDATA="${DATA_ROOT}"/import
-ENV PGDATA="${DATA_ROOT}"/dbase
+ENV HOME="/root" TERM="xterm"
+ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en"
+ENV PGCONF="/config" PG_MAJOR="9.5" DATA_ROOT="/data"
+ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
+ENV MBDATA="${DATA_ROOT}/import" PGDATA="${DATA_ROOT}/dbase"
 ENV URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 ENV POSTGRES_LOGS_FIFO="/var/run/s6/postgres-logs-fifo"
+ENV BABEL_DISABLE_CACHE="1"
+ENV MAX_WORKERS="1"
 
 # copy files required in build stage
 COPY prebuilds/ /defaults/
@@ -25,13 +25,15 @@ COPY prebuilds/ /defaults/
 # add abc user and set locale
 RUN \
  useradd -u 911 -U -d /config -s /bin/false abc && \
-	usermod -G users abc && \
-	locale-gen en_US.UTF-8
+ usermod -G users abc && \
+ locale-gen en_US.UTF-8
 
 # add postgresql repository and configure postgresql-common to not create cluster.
 RUN \
- apt-key adv --keyserver keyserver.ubuntu.com --recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 && \
- echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+ apt-key adv --keyserver keyserver.ubuntu.com \
+	--recv-keys B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8 && \
+ echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > \
+	/etc/apt/sources.list.d/pgdg.list && \
  apt-get update -q && \
  apt-get install -y \
 	postgresql-common && \
@@ -40,11 +42,14 @@ RUN \
 
 # cleanup
  apt-get clean && \
- rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+ rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/*
 
 # install dependencies
 RUN \
- apt-get update -q && \
+ apt-get update && \
  apt-get install -y \
 	cpanminus \
 	cron \
@@ -67,19 +72,21 @@ RUN \
 	wget && \
 
 # install nodejs and npm
- curl -sL https://deb.nodesource.com/setup_0.12 | bash - && \
+ curl -sL \
+	https://deb.nodesource.com/setup_4.x | bash - && \
  apt-get install -y \
 	nodejs && \
- 	npm install -g npm@latest && \
+ npm install -g npm@latest && \
 
 # clone musicbrainz and install perl and node packages
- git clone -b production --recursive git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
+ git clone -b production --recursive \
+	git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
-	cpanm MLEHMANN/Coro-6.49.tar.gz && \
-	cpanm --installdeps --notest . && \
-	npm install && \
-	./script/compile_resources.sh && \
+ cpanm --installdeps --notest . && \
+ cpanm --notest Starlet && \
+ npm install && \
+ ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
  cd /app/musicbrainz/postgresql-musicbrainz-unaccent && \
@@ -106,20 +113,23 @@ RUN \
 # install runtime dependencies
  apt-get update && \
  apt-get install -y \
-	libexpat1 \
-	libicu52 \
-	libpq5 \
-	libxml2 && \
+	libicu52 && \
 
-# add s6 overlay
- wget -O /tmp/s6.tar.gz \
-	https://github.com/just-containers/s6-overlay/releases/download/v1.17.2.0/s6-overlay-amd64.tar.gz && \
-	tar xvf /tmp/s6.tar.gz -C / && \
+# add s6 overlay
+# add s6 overlay
+ curl -o \
+ /tmp/s6-overlay.tar.gz -L \
+	"https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
+ tar xvfz /tmp/s6-overlay.tar.gz -C / && \
 
 # cleanup
  apt-get clean && \
  npm cache clean && \
- rm -rfv /var/lib/apt/lists/* /root/.cpanm /root/.npm /tmp/*
+ rm -rf \
+	/root/.cpanm \
+	/root/.npm \
+	/tmp/* \
+	/var/lib/apt/lists/*
 
 # add local files
 COPY root/ /
@@ -128,11 +138,11 @@ COPY root/ /
 RUN \
  chmod 600 /etc/crontab && \
  chmod +x /defaults/update-script.sh && \
- rm -fv \
-	/etc/cron.daily/standard \
-	/etc/cron.daily/upstart \
+ rm -f \
 	/etc/cron.daily/dpkg \
 	/etc/cron.daily/password \
+	/etc/cron.daily/standard \
+	/etc/cron.daily/upstart \
 	/etc/cron.weekly/fstrim
 
 ENTRYPOINT ["/init"]
