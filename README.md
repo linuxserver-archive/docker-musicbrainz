@@ -19,7 +19,7 @@ docker create --name=musicbrainz \
 -e PGID=<gid> -e PUID=<uid> \
 -e BRAINZCODE=<code from musicbrainz> \
 -e TZ=<timezone> \
--e MAX_WORKERS=<n cores>
+-e MAX_WORKERS=<n cores> \
 -p 5000:5000 \
 lsiodev/musicbrainz
 ```
