@@ -6,6 +6,10 @@ The [LinuxServer.io](https://linuxserver.io) team brings you another container r
 * [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # linuxserver/musicbrainz
+[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/musicbrainz.svg)][hub]
+[![Docker Stars](https://img.shields.io/docker/stars/linuxserver/musicbrainz.svg)][hub]
+[![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-musicbrainz)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-musicbrainz/)
+[hub]: https://hub.docker.com/r/linuxserver/musicbrainz/
 
 MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public. [Musicbrainz](https://musicbrainz.org/)
 
@@ -63,6 +67,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **28.08.16:** Add badges to README, move to main repository.
 + **20.07.16:** Restructure of docker file for clarity, add maxworkers variable in conjunction with starlet,
 for parallel requests in multi-core setups, thanks to user baoshan. 
 + **03.06.16:** Complete rewrite due to schema change. Rebased back to 14.04 direct Using S6 overaly.
