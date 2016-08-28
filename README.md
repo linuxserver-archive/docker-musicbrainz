@@ -5,10 +5,12 @@ The [LinuxServer.io](https://linuxserver.io) team brings you another container r
 * [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`
 * [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
-# lsiodev/musicbrainz
-![](https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/musicbrainzgitlogo.jpg)
+# linuxserver/musicbrainz
 
 MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public. [Musicbrainz](https://musicbrainz.org/)
+
+[![musicbrainz](https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/musicbrainzgitlogo.jpg)][brainzurl]
+[brainzurl]: https://musicbrainz.org/
 
 ## Usage
 
@@ -21,7 +23,7 @@ docker create --name=musicbrainz \
 -e TZ=<timezone> \
 -e MAX_WORKERS=<n cores> \
 -p 5000:5000 \
-lsiodev/musicbrainz
+linuxserver/musicbrainz
 ```
 
 **Parameters**
