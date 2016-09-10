@@ -1,17 +1,20 @@
-![https://linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
+[linuxserverurl]: https://linuxserver.io
+[forumurl]: https://forum.linuxserver.io
+[ircurl]: https://www.linuxserver.io/index.php/irc/
+[podcasturl]: https://www.linuxserver.io/index.php/category/podcast/
 
-The [LinuxServer.io](https://linuxserver.io) team brings you another container release featuring easy user mapping and community support. Find us for support at:
-* [forum.linuxserver.io](https://forum.linuxserver.io)
-* [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`
-* [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
+[![linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)][linuxserverurl]
+
+The [LinuxServer.io][linuxserverurl] team brings you another container release featuring easy user mapping and community support. Find us for support at:
+* [forum.linuxserver.io][forumurl]
+* [IRC][ircurl] on freenode at `#linuxserver.io`
+* [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # linuxserver/musicbrainz
-[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/musicbrainz.svg)][hub]
-[![Docker Stars](https://img.shields.io/docker/stars/linuxserver/musicbrainz.svg)][hub]
-[![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-musicbrainz)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-musicbrainz/)
+[![](https://images.microbadger.com/badges/image/linuxserver/musicbrainz.svg)](http://microbadger.com/images/linuxserver/musicbrainz "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/musicbrainz.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/musicbrainz.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-musicbrainz)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-musicbrainz/)
 [hub]: https://hub.docker.com/r/linuxserver/musicbrainz/
 
-MusicBrainz is an open music encyclopedia that collects music metadata and makes it available to the public. [Musicbrainz](https://musicbrainz.org/)
+[MusicBrainz][brainzurl] is an open music encyclopedia that collects music metadata and makes it available to the public.
 
 [![musicbrainz](https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/musicbrainzgitlogo.jpg)][brainzurl]
 [brainzurl]: https://musicbrainz.org/
@@ -67,6 +70,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **10.09.16:** Add layer badges to README.
 + **28.08.16:** Add badges to README, move to main repository.
 + **20.07.16:** Restructure of docker file for clarity, add maxworkers variable in conjunction with starlet,
 for parallel requests in multi-core setups, thanks to user baoshan. 
@@ -79,6 +83,4 @@ for parallel requests in multi-core setups, thanks to user baoshan.
 move fetch of db/dump higher up initialise routine to allow easier resume of broken downloads.
 + **15.12.15:** Per latest musicbrainz blog, switched to production branch,
 latest stable code is now production branch in place of master.
-+ **10.12.15:** Initial release date 
-
-
++ **10.12.15:** Initial release date
