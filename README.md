@@ -70,6 +70,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **30.09.16:** Fix umask.
 + **10.09.16:** Add layer badges to README.
 + **28.08.16:** Add badges to README, move to main repository.
 + **20.07.16:** Restructure of docker file for clarity, add maxworkers variable in conjunction with starlet,
