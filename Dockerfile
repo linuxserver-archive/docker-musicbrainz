@@ -1,6 +1,11 @@
 FROM ubuntu:14.04
 MAINTAINER sparklyballs
 
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+
 # build environment settings
 ARG PERL5LIB="/app/perl"
 ARG DEBIAN_FRONTEND="noninteractive"
