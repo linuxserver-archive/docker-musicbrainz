@@ -6,6 +6,8 @@ ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
+ENV test=test
+
 # build environment settings
 ARG PERL5LIB="/app/perl"
 ARG DEBIAN_FRONTEND="noninteractive"
