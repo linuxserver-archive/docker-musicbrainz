@@ -14,15 +14,13 @@ ARG DEBIAN_FRONTEND="noninteractive"
 ARG OVERLAY_VERSION="v1.18.1.5"
 
 # global environment settings
-ENV HOME="/root" TERM="xterm"
-ENV LANG="en_US.UTF-8" LANGUAGE="en_US:en"
+ENV BABEL_DISABLE_CACHE="1" HOME="/root" \
+LANG="en_US.UTF-8" LANGUAGE="en_US:en" MAX_WORKERS="1" \
+POSTGRES_LOGS_FIFO="/var/run/s6/postgres-logs-fifo" TERM="xterm" \
+URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 ENV PGCONF="/config" PG_MAJOR="9.5" DATA_ROOT="/data"
 ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
 ENV MBDATA="${DATA_ROOT}/import" PGDATA="${DATA_ROOT}/dbase"
-ENV URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
-ENV POSTGRES_LOGS_FIFO="/var/run/s6/postgres-logs-fifo"
-ENV BABEL_DISABLE_CACHE="1"
-ENV MAX_WORKERS="1"
 
 # copy files required in build stage
 COPY prebuilds/ /defaults/
@@ -42,7 +40,8 @@ RUN \
  apt-get update -q && \
  apt-get install -y \
 	postgresql-common && \
-	sed -ri 's/#(create_main_cluster) .*$/\1 = false/' \
+ sed -ri \
+	's/#(create_main_cluster) .*$/\1 = false/' \
 	/etc/postgresql-common/createcluster.conf && \
 
 # cleanup
@@ -83,9 +82,12 @@ RUN \
 	nodejs && \
  npm install -g npm@latest && \
 
-# clone musicbrainz and install perl and node packages
- git clone -b production --recursive \
-	git://github.com/metabrainz/musicbrainz-server.git /app/musicbrainz && \
+# clone musicbrainz, check out latest production release and install perl and node packages
+ git clone --recursive \
+	git://github.com/metabrainz/musicbrainz-server.git \
+	/app/musicbrainz && \
+ git -C /app/musicbrainz \
+	checkout $(git -C /app/musicbrainz describe --tags --candidates=1 --abbrev=0) && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
  cpanm --installdeps --notest . && \
@@ -105,7 +107,7 @@ RUN \
  apt-get purge --remove -y \
 	binutils \
 	g++ \
-        gcc \
+	gcc \
 	git-core \
 	libexpat1-dev \
 	libicu-dev \
