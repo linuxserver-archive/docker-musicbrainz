@@ -83,6 +83,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **08.12.16:** Rework Dockerfile, use node7.
 + **14.10.16:** Add version layer information.
 + **30.09.16:** Fix umask.
 + **10.09.16:** Add layer badges to README.
