@@ -29,6 +29,7 @@ ARG BUILD_PACKAGES="\
 	libxml2-dev \
 	make"
 ARG RUNTIME_PACKAGES="\
+	bzip2 \
 	cpanminus \
 	cron \
 	curl \
