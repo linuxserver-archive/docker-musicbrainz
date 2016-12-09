@@ -11,12 +11,6 @@ chown abc:abc "$DATA_ROOT"
 mkdir -p /var/run/postgresql /var/log/postgresql
 chown -R abc:abc /var/run/postgresql /var/log/postgresql /app
 
-if [ ! -p "${POSTGRES_LOGS_FIFO}" ]; then
-    mkfifo -m 0600 "${POSTGRES_LOGS_FIFO}"
-    chown abc:abc "${POSTGRES_LOGS_FIFO}"
-fi
-
-
 set_listen_addresses() {
 	sedEscapedValue="$(echo "*" | sed 's/[\/&]/\\&/g')"
 	sed -ri "s/^#?(listen_addresses\s*=\s*)\S+/\1'$sedEscapedValue'/" "$PGDATA/postgresql.conf"
@@ -72,5 +66,3 @@ mkdir -p "$PGCONF"
 [[ ! -f "$PGCONF"/postgresql.conf ]] && cp "$PGDATA"/postgresql.conf "$PGCONF"/postgresql.conf
 chown abc:abc "$PGCONF"/postgresql.conf
 chmod 666 "$PGCONF"/postgresql.conf
-
-crontab /defaults/musicbrainz
