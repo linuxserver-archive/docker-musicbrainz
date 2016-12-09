@@ -50,12 +50,14 @@ RUN \
  apk add --no-cache \
 	bzip2 \
 	curl \
+	expat \
 	icu-libs \
 	memcached \
 	nodejs \
 	patch \
 	perl-crypt-rijndael \
 	perl-net-ssleay \
+	procps \
 	redis \
 	tar \
 	wget && \
