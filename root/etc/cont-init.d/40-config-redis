@@ -5,7 +5,7 @@ mkdir -p /data/redis /var/log/redis
 
 # configure redis
 if [ ! -f "/config/redis.conf" ]; then
-cp /etc/redis/redis.conf /config/redis.conf
+cp /etc/redis.conf /config/redis.conf
 sed 's/^loglevel notice/loglevel warning/' -i /config/redis.conf
 sed 's/^daemonize yes/daemonize no/' -i /config/redis.conf
 sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /config/redis.conf

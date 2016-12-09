@@ -8,8 +8,8 @@ set -e
 mkdir -p "$MBDATA" "$PGDATA"
 chown abc:abc "$DATA_ROOT"
 
-mkdir -p /var/run/postgresql
-chown -R abc:abc /var/run/postgresql /app
+mkdir -p /var/run/postgresql /var/log/postgresql
+chown -R abc:abc /var/run/postgresql /var/log/postgresql /app
 
 if [ ! -p "${POSTGRES_LOGS_FIFO}" ]; then
     mkfifo -m 0600 "${POSTGRES_LOGS_FIFO}"
