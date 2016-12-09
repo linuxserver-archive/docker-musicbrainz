@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM lsiobase/xenial
 MAINTAINER sparklyballs
 
 # set version label
@@ -33,7 +33,7 @@ ARG RUNTIME_PACKAGES="\
 	cron \
 	curl \
 	libdb-dev \
-	libicu52 \
+	libicu55 \
 	memcached \
 	patch \
 	postgresql-contrib-"${PG_MAJOR}" \
@@ -42,16 +42,11 @@ ARG RUNTIME_PACKAGES="\
 	redis-server \
 	wget"
 
-# set version for s6 overlay
-ARG OVERLAY_VERSION="v1.18.1.5"
-
 # copy files required in build stage
 COPY prebuilds/ /defaults/
 
-# add abc user and set locale
+# set locale
 RUN \
- useradd -u 911 -U -d /config -s /bin/false abc && \
- usermod -G users abc && \
  locale-gen en_US.UTF-8 && \
 
 # install packages
@@ -98,12 +93,6 @@ RUN \
 	make && \
 	make install && \
 
-# add s6 overlay
- curl -o \
- /tmp/s6-overlay.tar.gz -L \
-	"https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-amd64.tar.gz" && \
- tar xvfz /tmp/s6-overlay.tar.gz -C / && \
-
 # configure cron
  chmod 600 /etc/crontab && \
  rm -f \
@@ -127,8 +116,6 @@ RUN \
 COPY root/ /
 RUN \
 	chmod +x /defaults/update-script.sh
-
-ENTRYPOINT ["/init"]
 
 # volumes and ports
 VOLUME /config /data
