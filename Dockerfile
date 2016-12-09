@@ -86,6 +86,7 @@ RUN \
  cd /app/musicbrainz && \
  cpanm --installdeps --notest . && \
  cpanm --notest Starlet && \
+ cpanm --notest Plack::Middleware::Debug::Base && \
  npm install && \
  ./script/compile_resources.sh && \
 
