@@ -12,6 +12,7 @@ COPY prebuilds/ /defaults/
 # package versions
 ENV PG_MAJOR="9.6" \
 PG_VERSION="9.6.1"
+ARG BRAINZ_VER="master"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" HOME="/root" \
@@ -109,7 +110,7 @@ RUN \
 	/app/musicbrainz && \
  curl -o \
  /tmp/musicbrainz.tar.gz -L \
-	https://github.com/metabrainz/musicbrainz-server/archive/production.tar.gz && \
+	"https://github.com/metabrainz/musicbrainz-server/archive/${BRAINZ_VER}.tar.gz" && \
  tar xf \
  /tmp/musicbrainz.tar.gz -C \
 	/app/musicbrainz --strip-components=1 && \
