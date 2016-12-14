@@ -108,6 +108,7 @@ RUN \
 	bzip2 \
 	curl \
 	expat \
+	git \
 	icu-libs \
 	nodejs \
 	patch \
