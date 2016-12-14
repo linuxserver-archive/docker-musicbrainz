@@ -9,61 +9,41 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 # copy files required in build stage
 COPY prebuilds/ /defaults/
 
-# package versions
+# package versions
+ARG BRAINZ_VER="production"
 ENV PG_MAJOR="9.6" \
 PG_VERSION="9.6.1"
-ARG BRAINZ_VER="master"
 
-# global environment settings
-ENV BABEL_DISABLE_CACHE="1" HOME="/root" \
-LANG="en_US.UTF-8" LANGUAGE="en_US:en" MAX_WORKERS="1" \
-TERM="xterm" URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
-ENV PGCONF="/config" DATA_ROOT="/data"
-ENV PATH="/usr/lib/postgresql/${PG_MAJOR}/bin:$PATH"
-ENV MBDATA="${DATA_ROOT}/import" PGDATA="${DATA_ROOT}/dbase"
+# global environment settings
+ENV BABEL_DISABLE_CACHE="1" \
+HOME="/root" \
+LANG="en_US.utf8" \
+MAX_WORKERS="1" \
+MBDATA="/data/import" \
+PATH="/usr/lib/postgresql/$PG_MAJOR/bin:$PATH" \
+PGCONF="/config" \
+PGDATA="/data/dbase" \
+URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
-# build environment settings
-ARG PERL5LIB="/app/perl"
-
-# install build packages
+# install postgres build packages
 RUN \
- apk add --no-cache --virtual=build-dependencies \
+ apk add --no-cache --virtual=postgres_build-dependencies \
 	bison \
-	db-dev \
-	expat-dev \
+	curl \
 	flex \
-	g++ \
 	gcc \
-	git \
-	icu-dev \
 	libc-dev \
 	libedit-dev \
-	libpq \
 	libxml2-dev \
 	libxslt-dev \
 	make \
 	openssl-dev \
-	perl-dev \
+	perl \
+	tar \
 	util-linux-dev \
 	zlib-dev && \
 
-# install runtime packages
- apk add --no-cache \
-	bzip2 \
-	curl \
-	expat \
-	icu-libs \
-	memcached \
-	nodejs \
-	patch \
-	perl-crypt-rijndael \
-	perl-net-ssleay \
-	procps \
-	redis \
-	tar \
-	wget && \
-
-# compile postgres
+# compile postgres
  mkdir -p \
 	/tmp/postgres-src && \
  curl -o \
@@ -101,9 +81,44 @@ RUN \
  sed -ri \
 	"s!^#?(listen_addresses)\s*=\s*\S+.*!\1 = '*'!" \
 	/usr/local/share/postgresql/postgresql.conf.sample && \
+# cleanup postgresql build
+ apk del --purge \
+	postgres_build-dependencies && \
+ rm -rf \
+	/tmp/* \
+	/usr/local/include/* && \
+ find /usr/local -name '*.a' -delete
 
-# install cpanm
- curl -L http://cpanmin.us | perl - App::cpanminus && \
+# MUSICBRAINZ INSTALL STARTS HERE
+
+# install build packages
+RUN \
+ apk add --no-cache --virtual=build-dependencies \
+	db-dev \
+	expat-dev \
+	g++ \
+	gcc \
+	icu-dev \
+	libxml2-dev \
+	make \
+	perl-dev && \
+
+# install runtime packages
+ apk add --no-cache \
+	bzip2 \
+	curl \
+	expat \
+	icu-libs \
+	nodejs \
+	patch \
+	perl \
+	perl-crypt-rijndael \
+	perl-dbd-pg \
+	perl-net-ssleay \
+	procps \
+	redis \
+	tar \
+	wget && \
 
 # fetch musicbrainz and install perl and node packages
  mkdir -p \
@@ -116,9 +131,17 @@ RUN \
 	/app/musicbrainz --strip-components=1 && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
+ curl -L http://cpanmin.us | perl - App::cpanminus && \
  cpanm --installdeps --notest . && \
- cpanm --notest Starlet && \
- cpanm --notest Plack::Middleware::Debug::Base && \
+ cpanm --notest \
+	Cache::Memcached::Fast \
+	Plack::Handler::Starlet \
+	Plack::Middleware::Debug::Base \
+	Server::Starter \
+	Starlet \
+	Starlet::Server \
+	Term::Size::Any && \
+
  npm install && \
  ./script/compile_resources.sh && \
 
@@ -134,15 +157,13 @@ RUN \
 	make && \
 	make install && \
 
-# cleanup
+# cleanup
  apk del --purge \
 	build-dependencies && \
- find /usr/local -name '*.a' -delete && \
  rm -rf \
 	/root/.cpanm \
 	/root/.npm \
-	/tmp/* \
-	/usr/local/include/*
+	/tmp/*
 
 # add local files
 COPY root/ /
