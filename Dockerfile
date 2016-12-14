@@ -85,9 +85,7 @@ RUN \
  apk del --purge \
 	postgres_build-dependencies && \
  rm -rf \
-	/tmp/* \
-	/usr/local/include/* && \
- find /usr/local -name '*.a' -delete
+	/tmp/*
 
 # MUSICBRAINZ INSTALL STARTS HERE
 
@@ -112,6 +110,7 @@ RUN \
 	icu-libs \
 	nodejs \
 	patch \
+	libpq \
 	perl \
 	perl-crypt-rijndael \
 	perl-dbd-pg \
