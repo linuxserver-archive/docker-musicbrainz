@@ -45,6 +45,7 @@ RUN \
 	libpq \
 	nodejs \
 	patch \
+	logrotate \
 	perl \
 	perl-crypt-rijndael \
 	perl-dbd-pg \
