@@ -39,6 +39,7 @@ RUN \
  apk add --no-cache \
 	bzip2 \
 	curl \
+	db \
 	expat \
 	git \
 	icu-libs \
@@ -81,14 +82,14 @@ RUN \
 	Cache::Memory \
 	Catalyst::Plugin::Cache::HTTP \
 	Catalyst::Plugin::StackTrace \
-	DBD::Pg \
 	Digest::MD5::File \
 	Plack::Handler::Starlet \
 	Plack::Middleware::Debug::Base \
 	Server::Starter \
 	Starlet \
 	Starlet::Server \
-	Term::Size::Any && \
+	Term::Size::Any \
+	TURNSTEP/DBD-Pg-3.4.2.tar.gz && \
  npm install && \
  ./script/compile_resources.sh && \
 
