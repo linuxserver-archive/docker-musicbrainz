@@ -67,7 +67,9 @@ RUN \
  tar xf \
  /tmp/musicbrainz.tar.gz -C \
 	/app/musicbrainz --strip-components=1 && \
- cat /app/musicbrainz/Makefile.PL | grep ^requires > /app/musicbrainz/cpanfile && \
+ if [ ! -e "/app/musicbrainz/cpanfile" ]; then \
+	cat /app/musicbrainz/Makefile.PL | grep ^requires > /app/musicbrainz/cpanfile; \
+	fi  && \
  sed -i '/![^#]/ s/\(^.*test_requires 'Coro';.*$\)/#\ \1/' /app/musicbrainz/cpanfile && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
