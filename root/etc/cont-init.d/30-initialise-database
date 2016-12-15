@@ -6,7 +6,7 @@ set -e
 
 
 mkdir -p "$MBDATA" "$PGDATA"
-chown abc:abc "$DATA_ROOT"
+chown abc:abc /data
 
 mkdir -p /var/run/postgresql /var/log/postgresql
 chown -R abc:abc /var/run/postgresql /var/log/postgresql /app
@@ -18,7 +18,7 @@ set_listen_addresses() {
 
 # initialise empty database structure and change temporary ownership config files
 if [ ! -s "$PGDATA/PG_VERSION" ]; then
-chown -R abc:abc "$DATA_ROOT"
+chown -R abc:abc /data
 
 dumpver=$(curl -s "$URL_ROOT"/LATEST)
 DUMP_URL="$URL_ROOT"/"$dumpver"
