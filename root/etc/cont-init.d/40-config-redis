@@ -18,3 +18,4 @@ mkdir -p /config/log
 
 # set permissions
 chown -R abc:abc /config  /data/redis /var/log/redis
+chmod +x /defaults/update-script.sh
