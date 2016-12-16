@@ -10,7 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="schema-change-2016-q2"
+ARG BRAINZ_VER="v-2016-10-10"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -18,7 +18,6 @@ HOME="/root" \
 LANG="en_US.utf8" \
 MAX_WORKERS="1" \
 MBDATA="/data/import" \
-PATH="/usr/lib/postgresql/$PG_MAJOR/bin:$PATH" \
 PGCONF="/config" \
 PGDATA="/data/dbase" \
 URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
@@ -43,7 +42,6 @@ RUN \
 	expat \
 	git \
 	icu-libs \
-	libpq \
 	nodejs \
 	patch \
 	logrotate \
@@ -88,13 +86,12 @@ RUN \
 	Server::Starter \
 	Starlet \
 	Starlet::Server \
-	Term::Size::Any \
-	TURNSTEP/DBD-Pg-3.4.2.tar.gz && \
+	Term::Size::Any && \
  npm install && \
  ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
- git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
+	git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
 	/tmp/postgresql-musicbrainz-unaccent && \
  cd /tmp/postgresql-musicbrainz-unaccent && \
 	make && \
