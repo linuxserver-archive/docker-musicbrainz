@@ -1,0 +1,1 @@
+0 * * * * /bin/bash /app/musicbrainz/admin/cron/slave.sh 

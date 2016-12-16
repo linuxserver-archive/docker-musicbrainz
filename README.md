@@ -50,7 +50,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e TZ` - timezone eg Europe/London
 * `-e MAX_WORKERS` Advanced optional configuration for parallel requests.
 
-It is based on ubuntu trusty with S6 overlay, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
+It is based on alpine linux with S6 overlay, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
 
 ### User / Group Identifiers
 
@@ -83,6 +83,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **16.12.16:** Rebase to alpine linux, entailing almost complete rewrite.
 + **14.10.16:** Add version layer information.
 + **30.09.16:** Fix umask.
 + **10.09.16:** Add layer badges to README.
