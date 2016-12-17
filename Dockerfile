@@ -20,6 +20,7 @@ MAX_WORKERS="1" \
 MBDATA="/data/import" \
 PGCONF="/config" \
 PGDATA="/data/dbase" \
+UPDATE_SLAVE_LOGDIR="/config/log/musicbrainz" \
 URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
 # install build packages
@@ -71,6 +72,7 @@ RUN \
 	cat /app/musicbrainz/Makefile.PL | grep ^requires > /app/musicbrainz/cpanfile; \
 	fi  && \
  sed -i '/![^#]/ s/\(^.*test_requires 'Coro';.*$\)/#\ \1/' /app/musicbrainz/cpanfile && \
+ sed -i 's#$MB_SERVER_ROOT/#$UPDATE_SLAVE_LOGDIR/#g' /app/musicbrainz/admin/cron/slave.sh && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
  curl -L http://cpanmin.us | perl - App::cpanminus && \
