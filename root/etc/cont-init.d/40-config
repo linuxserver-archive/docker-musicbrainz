@@ -5,7 +5,7 @@ mkdir -p /data/redis /var/log/redis
 
 # configure redis
 if [ ! -f "/config/redis.conf" ]; then
-cp /etc/redis/redis.conf /config/redis.conf
+cp /etc/redis.conf /config/redis.conf
 sed 's/^loglevel notice/loglevel warning/' -i /config/redis.conf
 sed 's/^daemonize yes/daemonize no/' -i /config/redis.conf
 sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /config/redis.conf
@@ -14,7 +14,11 @@ sed -i 's#/var/lib/redis#/data/redis#g' /config/redis.conf
 fi
 
 # create final folders for slave log
-mkdir -p /config/log
+mkdir -p "${UPDATE_SLAVE_LOGDIR}"
+
+# create log file if not exists
+[[ ! -e "$UPDATE_SLAVE_LOGDIR/slave.log" ]] && \
+	touch "$UPDATE_SLAVE_LOGDIR/slave.log"
 
 # set permissions
 chown -R abc:abc /config  /data/redis /var/log/redis

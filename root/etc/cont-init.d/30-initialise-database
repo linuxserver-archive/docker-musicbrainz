@@ -6,16 +6,10 @@ set -e
 
 
 mkdir -p "$MBDATA" "$PGDATA"
-chown abc:abc "$DATA_ROOT"
+chown abc:abc /data
 
-mkdir -p /var/run/postgresql
-chown -R abc:abc /var/run/postgresql /app
-
-if [ ! -p "${POSTGRES_LOGS_FIFO}" ]; then
-    mkfifo -m 0600 "${POSTGRES_LOGS_FIFO}"
-    chown abc:abc "${POSTGRES_LOGS_FIFO}"
-fi
-
+mkdir -p /var/run/postgresql /var/log/postgresql
+chown -R abc:abc /var/run/postgresql /var/log/postgresql /app
 
 set_listen_addresses() {
 	sedEscapedValue="$(echo "*" | sed 's/[\/&]/\\&/g')"
@@ -24,7 +18,7 @@ set_listen_addresses() {
 
 # initialise empty database structure and change temporary ownership config files
 if [ ! -s "$PGDATA/PG_VERSION" ]; then
-chown -R abc:abc "$DATA_ROOT"
+chown -R abc:abc /data
 
 dumpver=$(curl -s "$URL_ROOT"/LATEST)
 DUMP_URL="$URL_ROOT"/"$dumpver"
@@ -72,5 +66,3 @@ mkdir -p "$PGCONF"
 [[ ! -f "$PGCONF"/postgresql.conf ]] && cp "$PGDATA"/postgresql.conf "$PGCONF"/postgresql.conf
 chown abc:abc "$PGCONF"/postgresql.conf
 chmod 666 "$PGCONF"/postgresql.conf
-
-crontab /defaults/musicbrainz
