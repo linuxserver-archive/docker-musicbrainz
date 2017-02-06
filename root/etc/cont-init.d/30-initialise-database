@@ -28,13 +28,9 @@ chown abc:abc "$DUMP_DEST"
 echo "fetching latest dump from musicbrainz, if this section fails try again later as musicbrainz dump may not be fully uploaded 
 to their site"
 
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-cdstubs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cdstubs.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-cover-art-archive.tar.bz2 -L -C - "$DUMP_URL"/mbdump-cover-art-archive.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-derived.tar.bz2 -L -C - "$DUMP_URL"/mbdump-derived.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-editor.tar.bz2 -L -C - "$DUMP_URL"/mbdump-editor.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-stats.tar.bz2 -L -C - "$DUMP_URL"/mbdump-stats.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump-wikidocs.tar.bz2 -L -C - "$DUMP_URL"/mbdump-wikidocs.tar.bz2
-s6-setuidgid abc curl -o "$DUMP_DEST"/mbdump.tar.bz2 -L -C - "$DUMP_URL"/mbdump.tar.bz2
+for fetch_file in {mbdump-cdstubs.tar.bz2,mbdump-cover-art-archive.tar.bz2,mbdump-derived.tar.bz2,mbdump-editor.tar.bz2,mbdump-stats.tar.bz2,mbdump.tar.bz2,mbdump-wikidocs.tar.bz2}; do
+s6-setuidgid abc curl -o "$DUMP_DEST/$fetch_file" -L -C - "$DUMP_URL/$fetch_file"
+done
 
 echo "initialising empty databases"
 s6-setuidgid abc initdb >/dev/null 2>&1
