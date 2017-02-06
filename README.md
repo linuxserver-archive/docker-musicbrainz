@@ -83,6 +83,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **06.02.17:** rebase to alpine 3.5
 + **16.12.16:** Rebase to alpine linux, entailing almost complete rewrite.
 + **14.10.16:** Add version layer information.
 + **30.09.16:** Fix umask.
