@@ -28,7 +28,6 @@ docker create --name=musicbrainz \
 -e PGID=<gid> -e PUID=<uid> \
 -e BRAINZCODE=<code from musicbrainz> \
 -e TZ=<timezone> \
--e MAX_WORKERS=<n cores> \
 -p 5000:5000 \
 linuxserver/musicbrainz
 ```
@@ -48,7 +47,6 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PUID` for UserID - see below for explanation
 * `-e BRAINZCODE` - to enter musicbrainz code. see below
 * `-e TZ` - timezone eg Europe/London
-* `-e MAX_WORKERS` Advanced optional configuration for parallel requests.
 
 It is based on alpine linux with S6 overlay, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
 
@@ -64,6 +62,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 ```
       
 ## Setting up the application 
++ **AFTER iniatilisation is complete you will need to edit the line `sub WEB_SERVER { "localhost:5000" }` in file /config/DBDefs.pm changing localhost to the ip of your host, this is to allow css to display properly**
 
 * You must register here to recieve a musicbrainz code to allow you to recieve database updates, it is free. [Get Code here](https://metabrainz.org/supporters/account-type). 
 * The initial import and setup of the database can take quite a long time, dependant on your download speed etc, be patient and don't restart the container before it's complete.
@@ -83,6 +82,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **04.03.17:** Bump server version and use nginx to serve web pages.
 + **06.02.17:** rebase to alpine 3.5
 + **16.12.16:** Rebase to alpine linux, entailing almost complete rewrite.
 + **14.10.16:** Add version layer information.

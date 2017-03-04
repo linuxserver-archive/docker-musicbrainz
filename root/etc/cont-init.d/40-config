@@ -1,7 +1,12 @@
 #!/usr/bin/with-contenv bash
 
-# create redis folders
-mkdir -p /data/redis /var/log/redis
+# create folders
+mkdir -p \
+	/config/log/nginx \
+	/config/nginx \
+	/data/redis \
+	/var/log/redis \
+	/var/run
 
 # configure redis
 if [ ! -f "/config/redis.conf" ]; then
@@ -13,6 +18,10 @@ sed 's/^logfile \/var\/log\/redis\/redis-server.log/logfile \"\"/' -i /config/re
 sed -i 's#/var/lib/redis#/data/redis#g' /config/redis.conf
 fi
 
+# configure nginx
+[[ ! -e /config/nginx/default ]] && \
+	cp /defaults/default /config/nginx/default
+
 # create final folders for slave log
 mkdir -p "${UPDATE_SLAVE_LOGDIR}"
 
@@ -21,4 +30,8 @@ mkdir -p "${UPDATE_SLAVE_LOGDIR}"
 	touch "$UPDATE_SLAVE_LOGDIR/slave.log"
 
 # set permissions
-chown -R abc:abc /config  /data/redis /var/log/redis
+chown -R abc:abc \
+	/config  \
+	/data/redis \
+	/var/log/redis \
+	/var/run

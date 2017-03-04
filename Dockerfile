@@ -10,7 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2016-10-10"
+ARG BRAINZ_VER="v-2017-02-27"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -43,6 +43,7 @@ RUN \
 	expat \
 	git \
 	icu-libs \
+	nginx \
 	nodejs \
 	patch \
 	logrotate \
@@ -83,6 +84,8 @@ RUN \
 	Catalyst::Plugin::Cache::HTTP \
 	Catalyst::Plugin::StackTrace \
 	Digest::MD5::File \
+	FCGI \
+	FCGI::ProcManager \
 	Plack::Handler::Starlet \
 	Plack::Middleware::Debug::Base \
 	Server::Starter \
@@ -103,6 +106,11 @@ RUN \
  cd /tmp/postgresql-musicbrainz-collate && \
 	make && \
 	make install && \
+
+# configure nginx
+ echo 'fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;' >> \
+	/etc/nginx/fastcgi_params && \
+ rm -f /etc/nginx/conf.d/default.conf && \
 
 # cleanup
  apk del --purge \
