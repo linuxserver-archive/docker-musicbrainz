@@ -5,5 +5,5 @@ cd /app/musicbrainz || exit
 exec \
 	s6-setuidgid abc plackup -I lib -s FCGI \
 	-E deployment --port 55901 --nproc 5 \
-	--pid fcgi.pid --keep-stderr=1
+	--pid fcgi.pid --keep-stderr=1 > /dev/null 2>&1
 
