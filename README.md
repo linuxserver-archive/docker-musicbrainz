@@ -3,6 +3,7 @@
 [ircurl]: https://www.linuxserver.io/irc/
 [podcasturl]: https://www.linuxserver.io/podcast/
 [appurl]: https://musicbrainz.org/
+[hub]: https://hub.docker.com/r/linuxserver/musicbrainz/
 
 [![linuxserver.io](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/linuxserver_medium.png)][linuxserverurl]
 
@@ -13,7 +14,6 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 
 # linuxserver/musicbrainz
 [![](https://images.microbadger.com/badges/version/linuxserver/musicbrainz.svg)](https://microbadger.com/images/linuxserver/musicbrainz "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/musicbrainz.svg)](http://microbadger.com/images/linuxserver/musicbrainz "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/musicbrainz.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/musicbrainz.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-musicbrainz)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-musicbrainz/)
-[hub]: https://hub.docker.com/r/linuxserver/musicbrainz/
 
 [MusicBrainz][appurl] is an open music encyclopedia that collects music metadata and makes it available to the public.
 
