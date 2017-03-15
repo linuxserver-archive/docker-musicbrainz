@@ -10,7 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2017-02-27"
+ARG BRAINZ_VER="v-2017-03-13"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -96,7 +96,7 @@ RUN \
  ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
-	git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
+ git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
 	/tmp/postgresql-musicbrainz-unaccent && \
  cd /tmp/postgresql-musicbrainz-unaccent && \
 	make && \
