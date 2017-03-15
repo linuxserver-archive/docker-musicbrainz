@@ -96,7 +96,7 @@ RUN \
  ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
-	git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
+ git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
 	/tmp/postgresql-musicbrainz-unaccent && \
  cd /tmp/postgresql-musicbrainz-unaccent && \
 	make && \
