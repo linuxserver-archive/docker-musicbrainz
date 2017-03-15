@@ -82,6 +82,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **15.03.17:** Bump server version 2017-03-13.
 + **04.03.17:** Bump server version and use nginx to serve web pages.
 + **06.02.17:** rebase to alpine 3.5
 + **16.12.16:** Rebase to alpine linux, entailing almost complete rewrite.
