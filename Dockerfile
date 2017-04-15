@@ -10,7 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2017-03-27"
+ARG BRAINZ_VER="v-2017-04-10"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
