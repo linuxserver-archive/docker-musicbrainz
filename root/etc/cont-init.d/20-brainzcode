@@ -10,4 +10,8 @@ SANEDBRAINZCODE1="${SANEDBRAINZCODE0#"${SANEDBRAINZCODE0%%[![:space:]]*}"}"
 SANEDBRAINZCODE="${SANEDBRAINZCODE1%"${SANEDBRAINZCODE1##*[![:space:]]}"}"
 sed -i "s|\(sub REPLICATION_ACCESS_TOKEN\ {\ \\\"\)[^<>]*\(\\\"\ }\)|\1${SANEDBRAINZCODE}\2|" /config/DBDefs.pm
 
+# set ip for webserver
+WEBADDRESS=${WEBADDRESS:-localhost}
+sed -i "s/sub WEB_SERVER { \".*:5000\" }/sub WEB_SERVER { \"${WEBADDRESS}:5000\" }/g" /config/DBDefs.pm
+
 chown -R abc:abc /config
