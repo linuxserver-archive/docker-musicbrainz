@@ -61,14 +61,10 @@ RUN \
 	wget && \
 
 # fetch musicbrainz and install perl and node packages
- mkdir -p \
+ git clone \
+	-b v-2017-05-15-schema-change \
+	--recursive git://github.com/metabrainz/musicbrainz-server.git \
 	/app/musicbrainz && \
- curl -o \
- /tmp/musicbrainz.tar.gz -L \
-	"https://github.com/metabrainz/musicbrainz-server/archive/${BRAINZ_VER}.tar.gz" && \
- tar xf \
- /tmp/musicbrainz.tar.gz -C \
-	/app/musicbrainz --strip-components=1 && \
  if [ ! -e "/app/musicbrainz/cpanfile" ]; then \
 	cat /app/musicbrainz/Makefile.PL | grep ^requires > /app/musicbrainz/cpanfile; \
 	fi  && \
@@ -96,14 +92,10 @@ RUN \
  ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
- git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
-	/tmp/postgresql-musicbrainz-unaccent && \
- cd /tmp/postgresql-musicbrainz-unaccent && \
+ cd /app/musicbrainz/postgresql-musicbrainz-unaccent && \
 	make && \
 	make install && \
- git clone git://github.com/metabrainz/postgresql-musicbrainz-collate.git \
-	/tmp/postgresql-musicbrainz-collate && \
- cd /tmp/postgresql-musicbrainz-collate && \
+ cd /app/musicbrainz/postgresql-musicbrainz-collate && \
 	make && \
 	make install && \
 
@@ -116,6 +108,7 @@ RUN \
  apk del --purge \
 	build-dependencies && \
  rm -rf \
+	/app/musicbrainz/.git \
 	/root/.cpanm \
 	/root/.npm \
 	/tmp/*
