@@ -82,7 +82,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
-+ **15.05.17:** Schema 24 update.
++ **15.05.17:** Schema 24 update, recommend full rebuild with new config.
 + **15.04.17:** Bump server version 2017-04-10.
 + **04.04.17:** Bump server version 2017-03-27.
 + **15.03.17:** Bump server version 2017-03-13.
