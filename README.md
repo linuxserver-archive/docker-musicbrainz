@@ -28,6 +28,7 @@ docker create --name=musicbrainz \
 -e PGID=<gid> -e PUID=<uid> \
 -e BRAINZCODE=<code from musicbrainz> \
 -e TZ=<timezone> \
+-e WEBADDRESS=<ip of host> \
 -p 5000:5000 \
 linuxserver/musicbrainz
 ```
@@ -46,6 +47,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 * `-e BRAINZCODE` - to enter musicbrainz code. see below
+* `-e WEBADDRESS` - to set ip for host to allow css to render properly, DO NOT ENTER PORT NUMBER.
 * `-e TZ` - timezone eg Europe/London
 
 It is based on alpine linux with S6 overlay, for shell access whilst the container is running do `docker exec -it musicbrainz /bin/bash`.
@@ -62,7 +64,9 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 ```
       
 ## Setting up the application 
-+ **AFTER iniatilisation is complete you will need to edit the line `sub WEB_SERVER { "localhost:5000" }` in file /config/DBDefs.pm changing localhost to the ip of your host, this is to allow css to display properly**
++ For schema 24 updates you should pull the latest image, clear all files and folders in /config and /data and reinitiate the database import by (re)starting the docker.
+
++ **If you did not set WEBADDRESS env variable, then AFTER iniatilisation is complete you will need to edit the line `sub WEB_SERVER { "localhost:5000" }` in file /config/DBDefs.pm changing localhost to the ip of your host, this is to allow css to display properly**
 
 * You must register here to recieve a musicbrainz code to allow you to recieve database updates, it is free. [Get Code here](https://metabrainz.org/supporters/account-type). 
 * The initial import and setup of the database can take quite a long time, dependant on your download speed etc, be patient and don't restart the container before it's complete.
@@ -82,6 +86,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **15.05.17:** Schema 24 update, recommend full rebuild with new config.
 + **15.04.17:** Bump server version 2017-04-10.
 + **04.04.17:** Bump server version 2017-03-27.
 + **15.03.17:** Bump server version 2017-03-13.
