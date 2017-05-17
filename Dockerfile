@@ -12,18 +12,17 @@ COPY prebuilds/ /defaults/
 # package versions
 ARG BRAINZ_VER="v-2017-05-15-schema-change"
 
-# global environment settings
+# global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
 HOME="/root" \
 LANG="en_US.utf8" \
-MAX_WORKERS="1" \
 MBDATA="/data/import" \
 PGCONF="/config" \
 PGDATA="/data/dbase" \
 UPDATE_SLAVE_LOGDIR="/config/log/musicbrainz" \
 URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
-# install build packages
+# install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	db-dev \
@@ -35,7 +34,7 @@ RUN \
 	make \
 	perl-dev && \
 
-# install runtime packages
+# install runtime packages
  apk add --no-cache \
 	bzip2 \
 	curl \
@@ -61,14 +60,14 @@ RUN \
 	wget && \
 
 # fetch musicbrainz and install perl and node packages
- git clone \
-	-b v-2017-05-15-schema-change \
-	--recursive git://github.com/metabrainz/musicbrainz-server.git \
+ mkdir -p \
 	/app/musicbrainz && \
- if [ ! -e "/app/musicbrainz/cpanfile" ]; then \
-	cat /app/musicbrainz/Makefile.PL | grep ^requires > /app/musicbrainz/cpanfile; \
-	fi  && \
- sed -i '/![^#]/ s/\(^.*test_requires 'Coro';.*$\)/#\ \1/' /app/musicbrainz/cpanfile && \
+ curl -o \
+ /tmp/musicbrainz.tar.gz -L \
+	"https://github.com/metabrainz/musicbrainz-server/archive/${BRAINZ_VER}.tar.gz" && \
+ tar xf \
+ /tmp/musicbrainz.tar.gz -C \
+	/app/musicbrainz --strip-components=1 && \
  sed -i 's#$MB_SERVER_ROOT/#$UPDATE_SLAVE_LOGDIR/#g' /app/musicbrainz/admin/cron/slave.sh && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
@@ -92,10 +91,14 @@ RUN \
  ./script/compile_resources.sh && \
 
 # compile musicbrainz postgresql addons
- cd /app/musicbrainz/postgresql-musicbrainz-unaccent && \
+ git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
+	/tmp/postgresql-musicbrainz-unaccent && \
+ cd /tmp/postgresql-musicbrainz-unaccent && \
 	make && \
 	make install && \
- cd /app/musicbrainz/postgresql-musicbrainz-collate && \
+ git clone git://github.com/metabrainz/postgresql-musicbrainz-collate.git \
+	/tmp/postgresql-musicbrainz-collate && \
+ cd /tmp/postgresql-musicbrainz-collate && \
 	make && \
 	make install && \
 
@@ -108,12 +111,11 @@ RUN \
  apk del --purge \
 	build-dependencies && \
  rm -rf \
-	/app/musicbrainz/.git \
 	/root/.cpanm \
 	/root/.npm \
 	/tmp/*
 
-# add local files
+# add local files
 COPY root/ /
 
 # volumes and ports
