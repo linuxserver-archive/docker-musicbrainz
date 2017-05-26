@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.5
+FROM lsiobase/alpine:3.6
 MAINTAINER sparklyballs
 
 # set version label
@@ -43,7 +43,7 @@ RUN \
 	git \
 	icu-libs \
 	nginx \
-	nodejs \
+	nodejs-npm \
 	patch \
 	logrotate \
 	perl \
