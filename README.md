@@ -86,6 +86,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **26.05.17:** Fix later build of postgres using /run instead of /var/run.
 + **26.05.17:** Rebase to alpine 3.6.
 + **15.05.17:** Schema 24 update, recommend full rebuild with new config.
 + **15.04.17:** Bump server version 2017-04-10.

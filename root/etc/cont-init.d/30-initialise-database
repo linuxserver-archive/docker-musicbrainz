@@ -8,8 +8,8 @@ set -e
 mkdir -p "$MBDATA" "$PGDATA"
 chown abc:abc /data
 
-mkdir -p /var/run/postgresql /var/log/postgresql
-chown -R abc:abc /var/run/postgresql /var/log/postgresql /app
+mkdir -p /run/postgresql /var/log/postgresql
+chown -R abc:abc /run/postgresql /var/log/postgresql /app
 
 set_listen_addresses() {
 	sedEscapedValue="$(echo "*" | sed 's/[\/&]/\\&/g')"
