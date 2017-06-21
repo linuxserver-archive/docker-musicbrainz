@@ -10,7 +10,7 @@ LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DA
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2017-05-15-schema-change"
+ARG BRAINZ_VER="v-2017-06-19"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -69,9 +69,6 @@ RUN \
  /tmp/musicbrainz.tar.gz -C \
 	/app/musicbrainz --strip-components=1 && \
  sed -i 's#$MB_SERVER_ROOT/#$UPDATE_SLAVE_LOGDIR/#g' /app/musicbrainz/admin/cron/slave.sh && \
-
-# fix DBD::Pg version to 3.5.3 in lieu of fix in next version
- sed -i "s/requires 'DBD::Pg'                                    => '3.5.3';/requires 'DBD::Pg'                                    , '== 3.5.3';/g" /app/musicbrainz/cpanfile && \
  cp /defaults/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm && \
  cd /app/musicbrainz && \
  curl -L http://cpanmin.us | perl - App::cpanminus && \
