@@ -86,6 +86,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **06.09.17:** Bump server version 2017-09-04.
 + **19.07.17:** Bump server version 2017-07-17.
 + **21.06.17:** Bump server version 2017-06-19.
 + **26.05.17:** Fix later build of postgres using /run instead of /var/run.
