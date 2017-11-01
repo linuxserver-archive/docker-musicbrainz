@@ -86,6 +86,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **31.10.17:** Bump server version 2017-10-31.
 + **20.09.17:** Bump server version 2017-09-18.
 + **06.09.17:** Bump server version 2017-09-04.
 + **19.07.17:** Bump server version 2017-07-17.
