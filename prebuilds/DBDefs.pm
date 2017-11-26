@@ -429,7 +429,7 @@ sub DB_STAGING_SERVER { 0 }
 
 # sub USE_ETAGS { 1 }
 
-# sub CATALYST_DEBUG { 1 }
+sub CATALYST_DEBUG { 0 }
 
 # If you are developing on MusicBrainz, you should set this to a true value
 # This will turn off some optimizations (such as CSS/JS compression) to make
