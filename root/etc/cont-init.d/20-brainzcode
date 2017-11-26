@@ -3,6 +3,8 @@
 [[ ! -L /app/musicbrainz/lib/DBDefs.pm && -f /app/musicbrainz/lib/DBDefs.pm ]] && rm /app/musicbrainz/lib/DBDefs.pm
 [[ ! -L /app/musicbrainz/lib/DBDefs.pm ]] && ln -s /config/DBDefs.pm /app/musicbrainz/lib/DBDefs.pm
 
+rm /tmp/musicbrainz-template-renderer.socket
+
 # sanitize brainzcode for white space
 SANEDBRAINZCODE0=$BRAINZCODE
 SANEDBRAINZCODE1="${SANEDBRAINZCODE0#"${SANEDBRAINZCODE0%%[![:space:]]*}"}"
