@@ -13,7 +13,7 @@ chown -R abc:abc /run/postgresql /var/log/postgresql /app
 
 set_listen_addresses() {
 	sedEscapedValue="$(echo "*" | sed 's/[\/&]/\\&/g')"
-	sed -ri "s/^#?(listen_addresses\s*=\s*)\S+/\1'$sedEscapedValue'/" "$PGDATA/postgresql.conf"
+	sed -ri "s/^#?(listen_addresses\\s*=\\s*)\\S+/\\1'$sedEscapedValue'/" "$PGDATA/postgresql.conf"
 }
 
 # initialise empty database structure and change temporary ownership config files
