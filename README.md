@@ -86,6 +86,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **30.11.17:** Fix linting recommendations.
 + **30.11.17:** Remove socket on startup if exists (thanks wtf911) [re](https://tickets.metabrainz.org/browse/MBS-9370).
 + **24.11.17:** Remove catalyst side bar on new installs.
 + **31.10.17:** Bump server version 2017-10-31.
