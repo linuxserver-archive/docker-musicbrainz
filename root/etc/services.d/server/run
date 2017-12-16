@@ -2,8 +2,11 @@
 
 cd /app/musicbrainz || exit
 
+# number of processes
+NPROC=${NPROC:-5}
+
 exec \
 	s6-setuidgid abc plackup -I lib -s FCGI \
-	-E deployment --port 55901 --nproc 5 \
+	-E deployment --port 55901 --nproc "$NPROC" \
 	--pid fcgi.pid --keep-stderr=1 > /dev/null 2>&1
 

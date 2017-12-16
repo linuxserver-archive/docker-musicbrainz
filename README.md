@@ -27,6 +27,7 @@ docker create --name=musicbrainz \
 -v <path to data >:/data \
 -e PGID=<gid> -e PUID=<uid> \
 -e BRAINZCODE=<code from musicbrainz> \
+-e NPROC=<parameter> \
 -e TZ=<timezone> \
 -e WEBADDRESS=<ip of host> \
 -p 5000:5000 \
@@ -47,6 +48,7 @@ http://192.168.x.x:8080 would show you what's running INSIDE the container on po
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 * `-e BRAINZCODE` - to enter musicbrainz code. see below
+* `-e NPROC` - to set number of proceses, defaults to 5 if unset.
 * `-e WEBADDRESS` - to set ip for host to allow css to render properly, DO NOT ENTER PORT NUMBER.
 * `-e TZ` - timezone eg Europe/London
 
@@ -86,6 +88,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **30.11.17:** Add NPROC variable  to allow number of processes to be set.
 + **30.11.17:** Fix linting recommendations.
 + **30.11.17:** Remove socket on startup if exists (thanks wtf911) [re](https://tickets.metabrainz.org/browse/MBS-9370).
 + **24.11.17:** Remove catalyst side bar on new installs.
