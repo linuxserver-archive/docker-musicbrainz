@@ -88,6 +88,7 @@ In this instance `PUID=1001` and `PGID=1001`. To find yours use `id user` as bel
 
 ## Versions
 
++ **10.01.18:** Bump server version 2018-01-10.
 + **31.10.17:** Bump server version 2017-12-21.
 + **30.11.17:** Add NPROC variable  to allow number of processes to be set.
 + **30.11.17:** Fix linting recommendations.

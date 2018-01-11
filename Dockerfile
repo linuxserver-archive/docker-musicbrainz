@@ -10,7 +10,7 @@ LABEL maintainer="sparklyballs"
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2017-12-21"
+ARG BRAINZ_VER="v-2018-01-10"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
