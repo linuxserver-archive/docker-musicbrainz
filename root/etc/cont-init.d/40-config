@@ -11,11 +11,12 @@ mkdir -p \
 # configure redis
 if [ ! -f "/config/redis.conf" ]; then
 cp /etc/redis.conf /config/redis.conf
-sed 's/^loglevel notice/loglevel warning/' -i /config/redis.conf
-sed 's/^daemonize yes/daemonize no/' -i /config/redis.conf
-sed 's/^bind 127.0.0.1/bind 0.0.0.0/' -i /config/redis.conf
-sed 's/^logfile \/var\/log\/redis\/redis-server.log/logfile \"\"/' -i /config/redis.conf
-sed -i 's#/var/lib/redis#/data/redis#g' /config/redis.conf
+sed \
+	-i -e 's/^loglevel notice/loglevel warning/' \
+	-i -e 's/^daemonize yes/daemonize no/' \
+	-i -e 's/^bind 127.0.0.1/bind 0.0.0.0/' \
+	-i -e 's#/var/lib/redis#/data/redis#g' \
+/config/redis.conf
 fi
 
 # configure nginx

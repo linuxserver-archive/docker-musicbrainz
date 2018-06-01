@@ -10,7 +10,7 @@ LABEL maintainer="sparklyballs"
 COPY prebuilds/ /defaults/
 
 # package versions
-ARG BRAINZ_VER="v-2018-05-09"
+ARG BRAINZ_VER="v-2018-05-30"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -42,7 +42,7 @@ RUN \
 	git \
 	icu-libs \
 	nginx \
-	nodejs-npm \
+	nodejs \
 	patch \
 	logrotate \
 	perl \
@@ -56,7 +56,8 @@ RUN \
 	procps \
 	redis \
 	tar \
-	wget && \
+	wget \
+	yarn && \
  echo "**** fetch musicbrainz and install perl and node packages ****" && \
  mkdir -p \
 	/app/musicbrainz && \
@@ -85,7 +86,8 @@ RUN \
 	Starlet \
 	Starlet::Server \
 	Term::Size::Any && \
- npm install && \
+ yarn install && \
+ yarn cache clean && \
  ./script/compile_resources.sh && \
  echo "**** compile musicbrainz postgresql addons ****" && \
  git clone git://github.com/metabrainz/postgresql-musicbrainz-unaccent \
@@ -107,7 +109,6 @@ RUN \
 	build-dependencies && \
  rm -rf \
 	/root/.cpanm \
-	/root/.npm \
 	/tmp/*
 
 # add local files
