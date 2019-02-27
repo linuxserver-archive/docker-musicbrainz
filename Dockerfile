@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.8
+FROM lsiobase/alpine:3.9
 
 # set version label
 ARG BUILD_DATE
@@ -22,7 +22,7 @@ URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
 RUN \
  echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies \
+ apk add --no-cache --virtual=build-dependencies --update \
 	db-dev \
 	expat-dev \
 	g++ \
@@ -33,7 +33,7 @@ RUN \
 	make \
 	perl-dev && \
  echo "**** install runtime packages ****" && \
- apk add --no-cache \
+ apk add --no-cache --update \
 	bzip2 \
 	curl \
 	db \

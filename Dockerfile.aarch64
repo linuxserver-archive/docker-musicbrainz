@@ -1,4 +1,4 @@
-FROM lsiobase/alpine.arm64:3.8
+FROM lsiobase/alpine.arm64:3.9
 
 # Add qemu to build on x86_64 systems
 COPY qemu-aarch64-static /usr/bin
@@ -28,7 +28,7 @@ URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
 RUN \
  echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies \
+ apk add --no-cache --virtual=build-dependencies --update \
 	db-dev \
 	expat-dev \
 	g++ \
@@ -39,7 +39,7 @@ RUN \
 	make \
 	perl-dev && \
  echo "**** install runtime packages ****" && \
- apk add --no-cache \
+ apk add --no-cache --update \
 	bzip2 \
 	curl \
 	db \
