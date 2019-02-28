@@ -22,7 +22,7 @@ URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
 RUN \
  echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies --update \
+ apk add --no-cache --virtual=build-dependencies --upgrade \
 	db-dev \
 	expat-dev \
 	g++ \
@@ -33,7 +33,7 @@ RUN \
 	make \
 	perl-dev && \
  echo "**** install runtime packages ****" && \
- apk add --no-cache --update \
+ apk add --no-cache --upgrade \
 	bzip2 \
 	curl \
 	db \
