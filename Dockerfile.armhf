@@ -1,4 +1,7 @@
-FROM lsiobase/alpine:3.9
+FROM lsiobase/alpine.armhf:3.9
+
+# Add qemu to build on x86_64 systems
+COPY qemu-arm-static /usr/bin
 
 # set version label
 ARG BUILD_DATE
@@ -9,6 +12,9 @@ LABEL maintainer="sparklyballs"
 
 # copy files required in build stage
 COPY prebuilds/ /defaults/
+
+# package versions
+ARG BRAINZ_VER="v-2019-01-22"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -59,16 +65,16 @@ RUN \
 	yarn && \
  echo "**** fetch musicbrainz and install perl and node packages ****" && \
  if [ -z ${MUSICBRAINZ_RELEASE+x} ]; then \
-	MUSICBRAINZ_RELEASE=$(git ls-remote --tags https://github.com/metabrainz/musicbrainz-server.git \
-	| grep -v '{}' \
-	| tail -n 1 \
-	| awk -F / '{print $3}'); \
+        MUSICBRAINZ_RELEASE=$(git ls-remote --tags https://github.com/metabrainz/musicbrainz-server.git \
+        | grep -v '{}' \
+        | tail -n 1 \
+        | awk -F / '{print $3}'); \
  fi && \
  mkdir -p \
 	/app/musicbrainz && \
  curl -o \
  /tmp/musicbrainz.tar.gz -L \
-	"https://github.com/metabrainz/musicbrainz-server/archive/${MUSICBRAINZ_RELEASE}.tar.gz" && \
+        "https://github.com/metabrainz/musicbrainz-server/archive/${MUSICBRAINZ_RELEASE}.tar.gz" && \
  tar xf \
  /tmp/musicbrainz.tar.gz -C \
 	/app/musicbrainz --strip-components=1 && \
