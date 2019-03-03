@@ -175,7 +175,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
-* **02.03.19:** - Revert to alpine 3.8 to fix gulp initializtion logic.
+* **02.03.19:** - Revert to alpine 3.6 to avoid database migrations.
 * **19.02.19:** - Multi Arch and add pipeline logic, rebase to Alpine 3.9
 * **22.08.18:** - Bump server version 2018-08-14.
 * **30.06.18:** - Bump server version 2018-06-30.
