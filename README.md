@@ -124,7 +124,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 &nbsp;
 ## Application Setup
 
-+ For schema 24 updates you should pull the latest image, clear all files and folders in /config and /data and reinitiate the database import by (re)starting the docker.
++ For all updates you should pull the latest image, clear all files and folders in /config and /data and reinitiate the database import by (re)starting the docker. We do not officially support upgrading this container in place with existing data sets. 
 
 + **If you did not set WEBADDRESS env variable, then AFTER iniatilisation is complete you will need to edit the line `sub WEB_SERVER { "localhost:5000" }` in file /config/DBDefs.pm changing localhost to the ip of your host, this is to allow css to display properly**
 
@@ -175,7 +175,7 @@ Below are the instructions for updating containers:
 
 ## Versions
 
-* **02.03.19:** - Revert to alpine 3.6 to avoid database migrations.
+* **02.03.19:** - Revert to alpine 3.8 to fix incompatibilities with frontend build tools.
 * **19.02.19:** - Multi Arch and add pipeline logic, rebase to Alpine 3.9
 * **22.08.18:** - Bump server version 2018-08-14.
 * **30.06.18:** - Bump server version 2018-06-30.
