@@ -2,6 +2,6 @@
 
 umask 022
 
-s6-setuidgid abc redis-server /config/redis.conf
+redis-server /config/redis.conf
 
 
