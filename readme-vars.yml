@@ -49,6 +49,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "17.05.19:", desc: "Update DBDefs.pm to schema 25 database." }
   - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "02.03.19:", desc: "Revert to alpine 3.8 to fix incompatibilities with frontend build tools." }
   - { date: "19.02.19:", desc: "Multi Arch and add pipeline logic, rebase to Alpine 3.9" }
