@@ -21,7 +21,7 @@ MBDATA="/data/import" \
 PGCONF="/config" \
 PGDATA="/data/dbase" \
 UPDATE_SLAVE_LOGDIR="/config/log/musicbrainz" \
-URL_ROOT="ftp://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
+URL_ROOT="http://ftp.musicbrainz.org/pub/musicbrainz/data/fullexport"
 
 RUN \
  echo "**** install build packages ****" && \
