@@ -3,8 +3,8 @@
 # project information
 project_name: musicbrainz
 project_url: "https://musicbrainz.org/"
-project_logo: "https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/musicbrainzgitlogo.jpg"
-project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is an open music encyclopedia that collects music metadata and makes it available to the public."
+project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/musicbrainz-icon.png"
+project_blurb: "[MusicBrainz]({{ project_url }}) is an open music encyclopedia that collects music metadata and makes it available to the public."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 
 # supported architectures
@@ -26,7 +26,7 @@ param_ports:
 param_usage_include_env: true
 param_env_vars:
   - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London"}
-  - { env_var: "BRAINZCODE", env_value: "<code from musicbrainz>", desc: "To enter musicbrainz code. see Setting up the application"}
+  - { env_var: "BRAINZCODE", env_value: "<code from MusicBrainz>", desc: "To enter MusicBrainz code. See Setting up the application"}
   - { env_var: "WEBADDRESS", env_value: "<ip of host>", desc: "To set ip for host to allow css to render properly, DO NOT ENTER PORT NUMBER."}
 
 # optional parameters
@@ -43,7 +43,7 @@ app_setup_block: |
 
   + **If you did not set WEBADDRESS env variable, then AFTER iniatilisation is complete you will need to edit the line `sub WEB_SERVER { "localhost:5000" }` in file /config/DBDefs.pm changing localhost to the ip of your host, this is to allow css to display properly**
 
-  * You must register here to recieve a musicbrainz code to allow you to recieve database updates, it is free. [Get Code here](https://metabrainz.org/supporters/account-type).
+  * You must register here to receive a MusicBrainz code to allow you to receive database updates, it is free. [Get Code here](https://metabrainz.org/supporters/account-type).
   * The initial import and setup of the database can take quite a long time, dependant on your download speed etc, be patient and don't restart the container before it's complete.
   * It appears there are issues with unraid and using /mnt/user/cache/appdata instead of /mnt/cache/appdata, use /mnt/cache/appdata.
 
