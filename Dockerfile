@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.8
+FROM lsiobase/alpine:3.12
 
 # set version label
 ARG BUILD_DATE
@@ -38,10 +38,11 @@ RUN \
 	curl \
 	db \
 	expat \
+        gettext \
 	git \
 	icu-libs \
 	nginx \
-	nodejs \
+	nodejs-current \
 	patch \
 	logrotate \
 	perl \
