@@ -39,7 +39,7 @@ Find us at:
 
 [Musicbrainz](https://musicbrainz.org/) is an open music encyclopedia that collects music metadata and makes it available to the public.
 
-[![musicbrainz](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/musicbrainz-icon.png)](https://musicbrainz.org/)
+[![musicbrainz](https://raw.githubusercontent.com/linuxserver/beta-templates/master/lsiodev/img/musicbrainzgitlogo.jpg)](https://musicbrainz.org/)
 
 ## Supported Architectures
 
