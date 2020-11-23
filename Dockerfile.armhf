@@ -1,17 +1,14 @@
-FROM lsiobase/alpine:arm32v7-3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.12
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 ARG MUSICBRAINZ_RELEASE
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL maintainer="aptalca"
 
 # copy files required in build stage
 COPY prebuilds/ /defaults/
-
-# package versions
-ARG BRAINZ_VER="v-2019-01-22"
 
 # global environment settings
 ENV BABEL_DISABLE_CACHE="1" \
@@ -41,7 +38,7 @@ RUN \
 	curl \
 	db \
 	expat \
-        gettext \
+	gettext \
 	git \
 	icu-libs \
 	nginx \
@@ -63,10 +60,10 @@ RUN \
 	yarn && \
  echo "**** fetch musicbrainz and install perl and node packages ****" && \
  if [ -z ${MUSICBRAINZ_RELEASE+x} ]; then \
-        MUSICBRAINZ_RELEASE=$(git ls-remote --tags https://github.com/metabrainz/musicbrainz-server.git \
-        | grep -v '{}' \
-        | tail -n 1 \
-        | awk -F / '{print $3}'); \
+	MUSICBRAINZ_RELEASE=$(git ls-remote --tags https://github.com/metabrainz/musicbrainz-server.git \
+	| grep -v '{}' \
+	| tail -n 1 \
+	| awk -F / '{print $3}'); \
  fi && \
  mkdir -p \
 	/app/musicbrainz && \
