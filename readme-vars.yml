@@ -49,6 +49,7 @@ app_setup_block: |
 
 # changelog
 changelogs:
+  - { date: "03.10.20:", desc: "Rebase to alpine 3.12, add gettext and move to nodejs-current." }
   - { date: "17.05.19:", desc: "Update DBDefs.pm to schema 25 database." }
   - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
   - { date: "02.03.19:", desc: "Revert to alpine 3.8 to fix incompatibilities with frontend build tools." }

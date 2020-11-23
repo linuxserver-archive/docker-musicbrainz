@@ -1,11 +1,11 @@
-FROM lsiobase/alpine:3.8
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 ARG MUSICBRAINZ_RELEASE
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL maintainer="aptalca"
 
 # copy files required in build stage
 COPY prebuilds/ /defaults/
@@ -38,10 +38,11 @@ RUN \
 	curl \
 	db \
 	expat \
+	gettext \
 	git \
 	icu-libs \
 	nginx \
-	nodejs \
+	nodejs-current \
 	patch \
 	logrotate \
 	perl \
