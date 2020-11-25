@@ -85,6 +85,7 @@ RUN \
 	Catalyst::Plugin::Cache::HTTP \
 	Catalyst::Plugin::StackTrace \
 	Digest::MD5::File \
+	DynaLoader::Functions \
 	FCGI \
 	FCGI::ProcManager \
 	Plack::Handler::Starlet \
