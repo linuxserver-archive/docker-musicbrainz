@@ -81,7 +81,7 @@ scanelf-1.2.6-r0
 shadow-4.8.1-r0
 ssl_client-1.31.1-r19
 tar-1.32-r1
-tzdata-2020c-r1
+tzdata-2020f-r0
 wget-1.20.3-r1
 xz-5.2.5-r0
 xz-libs-5.2.5-r0
